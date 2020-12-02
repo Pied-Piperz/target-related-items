@@ -7,6 +7,7 @@ const port = 3004;
 require('../database');
 const Game = require('../database/Game');
 
+
 const server = express();
 
 server.use(morgan('dev'));
@@ -52,8 +53,8 @@ server.use('/api/games/:id/together', (req, res) => {
       return Game.find({ system: game[0].system })
     })
     .then((games) => {
-      let gameIndex = games.findIndex((currGame) => {
-        return currGame._id.toString() === req.params.id.toString()
+      let gameIndex = games.findIndex((element) => {
+        return element._id.toString() === req.params.id.toString()
       })
 
       let togetherGames = [];
@@ -72,6 +73,60 @@ server.use('/api/games/:id/together', (req, res) => {
       res.send(err);
     });
 });
+
+server.use('/api/games/readAll', (req, res) => {
+  Game.find({})
+  .then((games) => {
+    res.send(games);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+});
+
+server.use('/api/games/readBySystem', (req, res) => {
+  Game.find({system: req.body.system})
+  .then((games) => {
+    res.send(games);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+});
+
+server.use('/api/games/create', (req, res) => {
+  var newGame = req.body;
+  Game.create(newGame)
+  .then(() => {
+    res.send('successfully created document');
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+});
+
+server.use('/api/games/:id/delete', (req, res) => {
+  var gameId = req.params.id;
+  Game.deleteOne({_id: gameId})
+  .then((deleted) => {
+    res.send('successfully deleted ' + deleted);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+});
+
+server.use('/api/games/:id/updateName', (req, res) => {
+  var gameId = req.params.id;
+  var newName = req.body.name;
+  Game.findOneAndUpdate({_id: gameId}, {item: newName})
+  .then(() => {
+    res.send('put');
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+})
 
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);
