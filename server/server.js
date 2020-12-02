@@ -14,7 +14,7 @@ server.use(morgan('dev'));
 server.use(bodyParser.json());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
-server.use('/api/games/one', (req, res) => {
+server.get('/api/games/one', (req, res) => {
   Game.find({})
     .then((games) => {
       let index = Math.floor(Math.random() * games.length);
@@ -25,7 +25,7 @@ server.use('/api/games/one', (req, res) => {
     });
 });
 
-server.use('/api/games/:id/similar', (req, res) => {
+server.get('/api/games/:id/similar', (req, res) => {
   Game.find({})
     .then((games) => {
       let similarGames = [];
@@ -47,7 +47,7 @@ server.use('/api/games/:id/similar', (req, res) => {
     });
 });
 
-server.use('/api/games/:id/together', (req, res) => {
+server.get('/api/games/:id/together', (req, res) => {
   Game.find({ _id: req.params.id })
     .then((game) => {
       return Game.find({ system: game[0].system })
@@ -74,7 +74,7 @@ server.use('/api/games/:id/together', (req, res) => {
     });
 });
 
-server.use('/api/games/readAll', (req, res) => {
+server.get('/api/games/readAll', (req, res) => {
   Game.find({})
   .then((games) => {
     res.send(games);
@@ -84,7 +84,7 @@ server.use('/api/games/readAll', (req, res) => {
   })
 });
 
-server.use('/api/games/readBySystem', (req, res) => {
+server.get('/api/games/readBySystem', (req, res) => {
   Game.find({system: req.body.system})
   .then((games) => {
     res.send(games);
@@ -94,7 +94,7 @@ server.use('/api/games/readBySystem', (req, res) => {
   })
 });
 
-server.use('/api/games/create', (req, res) => {
+server.post('/api/games/create', (req, res) => {
   var newGame = req.body;
   Game.create(newGame)
   .then(() => {
@@ -105,7 +105,7 @@ server.use('/api/games/create', (req, res) => {
   })
 });
 
-server.use('/api/games/:id/delete', (req, res) => {
+server.delete('/api/games/:id/delete', (req, res) => {
   var gameId = req.params.id;
   Game.deleteOne({_id: gameId})
   .then((deleted) => {
@@ -116,7 +116,7 @@ server.use('/api/games/:id/delete', (req, res) => {
   })
 });
 
-server.use('/api/games/:id/updateName', (req, res) => {
+server.put('/api/games/:id/updateName', (req, res) => {
   var gameId = req.params.id;
   var newName = req.body.name;
   Game.findOneAndUpdate({_id: gameId}, {item: newName})
