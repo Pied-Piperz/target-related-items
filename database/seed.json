@@ -265,5 +265,40 @@
     "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
     "system": "switch",
     "sku": 37
+  },
+  {
+    "item": "Shovel Knight: Treasure Trove - Nintendo Switch",
+    "price": 39.99,
+    "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
+    "system": "switch",
+    "sku": 38
+  },
+  {
+    "item": "Shovel Knight: Treasure Trove - Nintendo Switch",
+    "price": 39.99,
+    "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
+    "system": "switch",
+    "sku": 39
+  },
+  {
+    "item": "Shovel Knight: Treasure Trove - Nintendo Switch",
+    "price": 39.99,
+    "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
+    "system": "switch",
+    "sku": 40
+  }
+  ,  {
+    "item": "Shovel Knight: Treasure Trove - Nintendo Switch",
+    "price": 39.99,
+    "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
+    "system": "switch",
+    "sku": 41
+  },
+  {
+    "item": "Shovel Knight: Treasure Trove - Nintendo Switch",
+    "price": 39.99,
+    "imgUrl": "https://target.scene7.com/is/image/Target/GUEST_0d7699e6-5ac0-4ca0-a4c0-1c6b09404529?fmt=webp&wid=1400&qlt=80",
+    "system": "switch",
+    "sku": 42
   }
 ]

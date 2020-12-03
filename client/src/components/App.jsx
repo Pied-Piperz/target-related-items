@@ -21,7 +21,7 @@ class App extends React.Component {
   getInitalGame() {
     axios.get('/api/games/one')
       .then((res) => {
-        this.getSimilarGames(res.data._id);
+        this.getSimilarGames(res.data.sku);
         this.getTogetherGames(res.data._id);
       })
       .catch((err) => {
@@ -29,8 +29,8 @@ class App extends React.Component {
       });
   }
 
-  getSimilarGames(id) {
-    axios.get(`/api/games/${id}/similar`)
+  getSimilarGames(sku) {
+    axios.get(`/api/games/${sku}/similar`)
       .then((res) => {
         this.setState({
           similarGames: res.data
