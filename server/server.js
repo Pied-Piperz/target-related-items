@@ -23,6 +23,8 @@ server.get('/api/games/one', (req, res) => {
     .catch((err) => {
       console.error(err);
     });
+  // var index = Math.floor(Math.random() * 40);
+
 });
 
 server.get('/api/games/:id/similar', (req, res) => {

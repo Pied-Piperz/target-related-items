@@ -7,6 +7,7 @@ const seedData = (data) => {
   Game.deleteMany({})
     .then((res) => {
       console.log(`Deleted ${res.n} games!`)
+
       Game.insertMany(data)
         .then(() => {
           console.log('Game data seeded!');
