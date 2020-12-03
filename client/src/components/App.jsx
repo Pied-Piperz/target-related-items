@@ -22,7 +22,7 @@ class App extends React.Component {
     axios.get('/api/games/one')
       .then((res) => {
         this.getSimilarGames(res.data.sku);
-        this.getTogetherGames(res.data._id);
+        this.getTogetherGames(res.data.sku);
       })
       .catch((err) => {
         console.error(err);
@@ -41,8 +41,8 @@ class App extends React.Component {
       });
   }
 
-  getTogetherGames(id) {
-    axios.get(`/api/games/${id}/together`)
+  getTogetherGames(sku) {
+    axios.get(`/api/games/${sku}/together`)
       .then((res) => {
         this.setState({
           togetherGames: res.data

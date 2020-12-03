@@ -103,52 +103,60 @@ if (sku < 20) {
 
 });
 
+// server.get('/api/games/:id/together', (req, res) => {
+
+//   Game.find({ _id: req.params.id })
+//     .then((game) => {
+//       return Game.find({ system: game[0].system })
+//     })
+//     .then((games) => {
+//       console.log('hey')
+//       let gameIndex = games.findIndex((element) => {
+//         return element._id.toString() === req.params.id.toString()
+//       })
+
+//       let togetherGames = [];
+//       togetherGames.push(games[gameIndex])
+
+//       games.splice(gameIndex, 1);
+
+//       for (let i = 0; i < 2; i++) {
+//         let index = Math.floor(Math.random() * games.length);
+//         togetherGames.push(games[index]);
+//         games.splice(index, 1);
+//       }
+//       res.send(togetherGames);
+//     })
+//     .catch((err) => {
+//       res.send(err);
+//     });
+
+// });
+
 server.get('/api/games/:sku/together', (req, res) => {
-  // Game.find({ _id: req.params.id })
-  //   .then((game) => {
-  //     return Game.find({ system: game[0].system })
-  //   })
-  //   .then((games) => {
-  //     let gameIndex = games.findIndex((element) => {
-  //       return element._id.toString() === req.params.id.toString()
-  //     })
-
-  //     let togetherGames = [];
-  //     togetherGames.push(games[gameIndex])
-
-  //     games.splice(gameIndex, 1);
-
-  //     for (let i = 0; i < 2; i++) {
-  //       let index = Math.floor(Math.random() * games.length);
-  //       togetherGames.push(games[index]);
-  //       games.splice(index, 1);
-  //     }
-  //     res.send(togetherGames);
-  //   })
-  //   .catch((err) => {
-  //     res.send(err);
-  //   });
 
   var sku = Number(req.params.sku);
 
   if (sku < 38) {
-    Game.find({sku: { $gte: (sku + 1), $lte: (sku + 2) }})
-    .then((simGames) => {
-      res.send(simGames);
+    Game.find({sku: { $gte: (sku), $lte: (sku + 2) }})
+    .then((togetherGames) => {
+      res.send(togetherGames);
     })
     .catch((err) => {
       console.error(err);
     })
   } else {
-    Game.find({sku: { $gte: (sku - 2), $lte: (sku - 1) }})
-    .then((simGames) => {
-      res.send(simGames);
+    Game.find({sku: { $gte: (sku - 2), $lte: (sku) }})
+    .then((togetherGames) => {
+      res.send(togetherGames);
     })
     .catch((err) => {
       console.error(err);
     })
   }
+
 });
+
 
 server.get('/api/games/readAll', (req, res) => {
   Game.find({})
