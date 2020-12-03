@@ -62,6 +62,7 @@ server.get('/api/games/:sku/similar', (req, res) => {
   if (req.params.sku < 19) {
     Game.find({sku: { $gte: (req.params.sku + 1), $lte: (req.params.sku + 20) }})
     .then((simGames) => {
+      console.log(simGames);
       res.send(simGames);
     })
     .catch((err) => {
@@ -70,6 +71,7 @@ server.get('/api/games/:sku/similar', (req, res) => {
   } else {
     Game.find({sku: { $gte: (req.params.sku - 20), $lte: (req.params.sku - 1) }})
     .then((simGames) => {
+      console.log(simGames);
       res.send(simGames);
     })
     .catch((err) => {
