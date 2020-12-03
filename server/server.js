@@ -15,19 +15,30 @@ server.use(bodyParser.json());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
 server.get('/api/games/one', (req, res) => {
-  Game.find({})
-    .then((games) => {
-      let index = Math.floor(Math.random() * games.length);
-      res.send(games[index]);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  // var index = Math.floor(Math.random() * 40);
+  // Game.find({})
+  //   .then((games) => {
+  //     let index = Math.floor(Math.random() * games.length);
+  //     console.log(games[index]);
+  //     res.send(games[index]);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   });
+
+  var index = Math.floor(Math.random() * 38);
+  Game.findOne({sku: index})
+  .then((game) => {
+    console.log(game);
+    res.send(game);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
 
 });
 
 server.get('/api/games/:id/similar', (req, res) => {
+
   Game.find({})
     .then((games) => {
       let similarGames = [];
@@ -47,6 +58,7 @@ server.get('/api/games/:id/similar', (req, res) => {
     .catch((err) => {
       console.error(err);
     });
+
 });
 
 server.get('/api/games/:id/together', (req, res) => {
