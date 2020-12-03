@@ -58,70 +58,25 @@ server.get('/api/games/:sku/similar', (req, res) => {
   //     console.error(err);
   //   });
 
-  console.log(req.params.sku);
-  if (req.params.sku < 19) {
-    Game.find({sku: { $gte: (req.params.sku + 1), $lte: (req.params.sku + 20) }})
+  var sku = Number(req.params.sku);
+
+if (sku < 20) {
+    Game.find({sku: { $gte: (sku + 1), $lte: (sku + 20) }})
     .then((simGames) => {
-      console.log(simGames);
       res.send(simGames);
     })
     .catch((err) => {
       console.error(err);
     })
   } else {
-    Game.find({sku: { $gte: (req.params.sku - 20), $lte: (req.params.sku - 1) }})
+    Game.find({sku: { $gte: (sku - 20), $lte: (sku - 1) }})
     .then((simGames) => {
-      console.log(simGames);
       res.send(simGames);
     })
     .catch((err) => {
       console.error(err);
     })
   }
-
-
-    // if (req.params.sku < 19) {
-    //       console.log(simGames.length);
-    //       res.send(simGames);
-    //     }
-      // for (var i = (currGame.sku + 1); i < (currGame.sku + 21); i++) {
-      //   Game.findOne({sku: i})
-      //   .then((simGame) => {
-      //     similarArr.push(simGame);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   })
-      // }
-
-
-
-    // } else {
-    //   Game.find({sku: { $gte: (currGame.sku - 20), $lte: (currGame.sku - 1)}})
-    //   .then(simGames) => {
-    //     res.send(simGames);
-    //   }
-    //   .catch((err) => {
-    //     console.error(err);
-    //   })
-
-
-
-
-    //   for (var i = (currGame.sku - 1); i > (currGame.sku - 21); i--) {
-    //     Game.findOne({sku: i})
-    //     .then((simGame) => {
-    //       similarArr.push(simGame);
-    //     })
-    //     .catch((err) => {
-    //       console.error(err);
-    //     })
-      // }
-
-      // .then(() => {
-      //   console.log(similarArr);
-      //   res.send(similarArr);
-      // })
 
 });
 
