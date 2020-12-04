@@ -1,9 +1,13 @@
 const faker = require('faker');
+var fs = require('fs');
 
 var counter = 0;
-var dbArr = [];
+var file = fs.createWriteStream('./relatedItemsDatabase.json');
 
-while (counter < 10000) {
+file.write('[');
+
+// 10000000
+while (counter < 10000000) {
   var whichSystem = Math.floor(Math.random() * 4);
   if (whichSystem === 0) {
     whichSystem = 'switch';
@@ -14,7 +18,6 @@ while (counter < 10000) {
   } else {
     whichSystem = 'xbox one';
   }
-
   var docObj = {
     item: faker.lorem.sentence(),
     price: faker.commerce.price(25, 69, 0, '$') + '.99',
@@ -22,9 +25,16 @@ while (counter < 10000) {
     system: whichSystem,
     sku: counter
   }
+
+  if (counter % 100000 === 0) {
+    console.log(counter);
+  }
+
+  if (counter !== 9999999) {
+    file.write(JSON.stringify(docObj) + ',');
+  } else {
+    file.write(JSON.stringify(docObj));
+  }
   counter++;
-  dbArr.push(docObj);
 }
-
-
-console.log(dbArr.length);
+file.write(']');
