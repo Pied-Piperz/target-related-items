@@ -2,4 +2,5 @@ node_modules
 .env
 .DS_Store
 *.pem
-relateditemsDatabase.json
+relatedItemsDatabase.json
+relatedItemsDatabse.csv

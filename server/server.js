@@ -48,6 +48,7 @@ server.get('/api/games/:sku/oneBySku', (req, res) => {
   //   });
 
   var sku = Number(req.params.sku);
+  // var sku = req.params.sku;
 
   Game.findOne({sku: sku})
   .then((game) => {
@@ -83,7 +84,7 @@ server.get('/api/games/:sku/similar', (req, res) => {
 
   var sku = Number(req.params.sku);
 
-if (sku < 20) {
+if (sku < 9000000) {
     Game.find({sku: { $gte: (sku + 1), $lte: (sku + 20) }})
     .then((simGames) => {
       res.send(simGames);
@@ -137,7 +138,7 @@ server.get('/api/games/:sku/together', (req, res) => {
 
   var sku = Number(req.params.sku);
 
-  if (sku < 38) {
+  if (sku < 9000000) {
     Game.find({sku: { $gte: (sku), $lte: (sku + 2) }})
     .then((togetherGames) => {
       res.send(togetherGames);
