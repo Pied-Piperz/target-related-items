@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -L server/server.js",
-    "csvSeed": "sql -U donaldbumiller -d relateditems -a -f ./postgres/seed.sql",
+    "csvSeed": "node database/writeCSV.js && sql -U donaldbumiller -d relateditems -a -f ./postgres/seed.sql",
     "build": "webpack -d inline-source-map -w",
     "seed": "node database/insertSeed.js",
     "dev": "npm run start & npm run build"

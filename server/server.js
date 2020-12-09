@@ -15,16 +15,6 @@ server.use(bodyParser.json());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
 server.get('/api/games/one', (req, res) => {
-  // Game.find({})
-  //   .then((games) => {
-  //     let index = Math.floor(Math.random() * games.length);
-  //     console.log(games[index]);
-  //     res.send(games[index]);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });
-
   var index = Math.floor(Math.random() * 43);
   Game.findOne({sku: index})
   .then((game) => {
@@ -37,18 +27,7 @@ server.get('/api/games/one', (req, res) => {
 });
 
 server.get('/api/games/:sku/oneBySku', (req, res) => {
-  // Game.find({})
-  //   .then((games) => {
-  //     let index = Math.floor(Math.random() * games.length);
-  //     console.log(games[index]);
-  //     res.send(games[index]);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });
-
   var sku = Number(req.params.sku);
-  // var sku = req.params.sku;
 
   Game.findOne({sku: sku})
   .then((game) => {
@@ -61,27 +40,6 @@ server.get('/api/games/:sku/oneBySku', (req, res) => {
 });
 
 server.get('/api/games/:sku/similar', (req, res) => {
-
-  // Game.find({})
-  //   .then((games) => {
-  //     let similarGames = [];
-
-  //     let gameIndex = games.findIndex((currGame) => {
-  //       return currGame._id.toString() === req.params.id.toString();
-  //     })
-  //     games.splice(gameIndex, 1);
-
-  //     for (let i = 0; i < 20; i++) {
-  //       let index = Math.floor(Math.random() * games.length);
-  //       similarGames.push(games[index]);
-  //       games.splice(index, 1);
-  //     }
-  //     res.send(similarGames);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });
-
   var sku = Number(req.params.sku);
 
 if (sku < 9000000) {
@@ -104,38 +62,7 @@ if (sku < 9000000) {
 
 });
 
-// server.get('/api/games/:id/together', (req, res) => {
-
-//   Game.find({ _id: req.params.id })
-//     .then((game) => {
-//       return Game.find({ system: game[0].system })
-//     })
-//     .then((games) => {
-//       console.log('hey')
-//       let gameIndex = games.findIndex((element) => {
-//         return element._id.toString() === req.params.id.toString()
-//       })
-
-//       let togetherGames = [];
-//       togetherGames.push(games[gameIndex])
-
-//       games.splice(gameIndex, 1);
-
-//       for (let i = 0; i < 2; i++) {
-//         let index = Math.floor(Math.random() * games.length);
-//         togetherGames.push(games[index]);
-//         games.splice(index, 1);
-//       }
-//       res.send(togetherGames);
-//     })
-//     .catch((err) => {
-//       res.send(err);
-//     });
-
-// });
-
 server.get('/api/games/:sku/together', (req, res) => {
-
   var sku = Number(req.params.sku);
 
   if (sku < 9000000) {
