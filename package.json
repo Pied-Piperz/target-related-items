@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -L server/server.js",
+    "csvSeed": "sql -U donaldbumiller -d relateditems -a -f ./postgres/seed.sql",
     "build": "webpack -d inline-source-map -w",
     "seed": "node database/insertSeed.js",
     "dev": "npm run start & npm run build"
@@ -27,6 +28,8 @@
     "faker": "^5.1.0",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
+    "pg": "^8.5.1",
+    "pg-copy-streams": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

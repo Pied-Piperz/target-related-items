@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "user": "donaldbumiller",
+  "db": "relateditems",
+  "port": 5432
+}
