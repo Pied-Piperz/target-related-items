@@ -17,9 +17,18 @@ server.use(express.static(path.join(__dirname, '../client/dist')));
 
 server.get('/api/games/one', (req, res) => {
   var index = Math.floor(Math.random() * 10000000);
-  Game.findOne({sku: index})
+
+  // Game.findOne({sku: index})
+  // .then((game) => {
+  //   res.send(game);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // })
+
+  client.query(`SELECT * FROM games WHERE sku = ${index}`)
   .then((game) => {
-    res.send(game);
+    res.send(game.rows[0]);
   })
   .catch((err) => {
     console.error(err);
@@ -95,18 +104,36 @@ if (sku < 9000000) {
 server.get('/api/games/:sku/together', (req, res) => {
   var sku = Number(req.params.sku);
 
+  // if (sku < 9000000) {
+  //   Game.find({sku: { $gte: (sku), $lte: (sku + 2) }})
+  //   .then((togetherGames) => {
+  //     res.send(togetherGames);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   })
+  // } else {
+  //   Game.find({sku: { $gte: (sku - 2), $lte: (sku) }})
+  //   .then((togetherGames) => {
+  //     res.send(togetherGames);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   })
+  // }
+
   if (sku < 9000000) {
-    Game.find({sku: { $gte: (sku), $lte: (sku + 2) }})
-    .then((togetherGames) => {
-      res.send(togetherGames);
+    client.query(`SELECT * FROM games WHERE sku >= (${sku} + 1) AND sku <= (${sku} + 3)`)
+    .then((simGames) => {
+      res.send(simGames.rows);
     })
     .catch((err) => {
       console.error(err);
     })
   } else {
-    Game.find({sku: { $gte: (sku - 2), $lte: (sku) }})
-    .then((togetherGames) => {
-      res.send(togetherGames);
+    client.query(`SELECT * FROM games WHERE sku >= (${sku} - 3) AND sku <= (${sku} - 1)`)
+    .then((simGames) => {
+      res.send(simGames.rows);
     })
     .catch((err) => {
       console.error(err);
@@ -117,7 +144,15 @@ server.get('/api/games/:sku/together', (req, res) => {
 
 
 server.get('/api/games/readAll', (req, res) => {
-  Game.find({})
+  // Game.find({})
+  // .then((games) => {
+  //   res.send(games);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // })
+
+  client.query('SELECT * FROM games')
   .then((games) => {
     res.send(games);
   })
@@ -127,7 +162,15 @@ server.get('/api/games/readAll', (req, res) => {
 });
 
 server.get('/api/games/readBySystem', (req, res) => {
-  Game.find({system: req.body.system})
+  // Game.find({system: req.body.system})
+  // .then((games) => {
+  //   res.send(games);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // })
+
+  client.query(`SELECT * FROM games WHERE  system = ${req.body.system}`)
   .then((games) => {
     res.send(games);
   })
