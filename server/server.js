@@ -72,23 +72,23 @@ server.get('/api/games/:sku/similar', (req, res) => {
 //       console.error(err);
 //     })
 //   }
-// if (sku < 9000000) {
-//   client.query(`SELECT * FROM games WHERE `)
-//   .then((simGames) => {
-//     res.send(simGames);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   })
-// } else {
-//   Game.find({sku: { $gte: (sku - 20), $lte: (sku - 1) }})
-//   .then((simGames) => {
-//     res.send(simGames);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   })
-// }
+if (sku < 9000000) {
+  client.query(`SELECT * FROM games WHERE sku >= (${sku} + 1) AND sku <= (${sku} + 20)`)
+  .then((simGames) => {
+    res.send(simGames.rows);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+} else {
+  client.query(`SELECT * FROM games WHERE sku >= (${sku} - 20) AND sku <= (${sku} - 1)`)
+  .then((simGames) => {
+    res.send(simGames.rows);
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+}
 
 });
 
