@@ -4,10 +4,12 @@ const fs = require('fs');
 var counter = 0;
 var file = fs.createWriteStream('./relatedItemsDatabase.csv');
 
-file.write('imgUrl,item,price,system,sku');
+file.write('sku,imgUrl,item,price,system,togetherOne,togetherTwo,togetherThree');
 
 while (counter < 10000000) {
   var curRow = '\n';
+  curRow += (JSON.stringify(counter));
+  curRow += (',');
   curRow += ('http://placeimg.com/640/480');
   curRow += (',');
   curRow += (faker.lorem.sentence());
@@ -26,7 +28,11 @@ while (counter < 10000000) {
   }
   curRow += (whichSystem);
   curRow += (',');
-  curRow += (JSON.stringify(counter));
+  curRow += (Math.floor(Math.random() * 10000000))
+  curRow += (',');
+  curRow += (Math.floor(Math.random() * 10000000))
+  curRow += (',');
+  curRow += (Math.floor(Math.random() * 10000000))
   file.write(curRow);
   if (counter % 250000 === 0) {
     console.log(counter);
