@@ -6,6 +6,7 @@ const port = 3004;
 
 require('../database');
 const Game = require('../database/Game');
+const client = require('../postgres/index.js');
 
 
 const server = express();
@@ -15,7 +16,7 @@ server.use(bodyParser.json());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
 server.get('/api/games/one', (req, res) => {
-  var index = Math.floor(Math.random() * 43);
+  var index = Math.floor(Math.random() * 10000000);
   Game.findOne({sku: index})
   .then((game) => {
     res.send(game);
@@ -29,36 +30,65 @@ server.get('/api/games/one', (req, res) => {
 server.get('/api/games/:sku/oneBySku', (req, res) => {
   var sku = Number(req.params.sku);
 
-  Game.findOne({sku: sku})
+  // Game.findOne({sku: sku})
+  // .then((game) => {
+  //   res.send(game);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // })
+
+  // client.query("SHOW search_path", function(err, result) {
+  //   console.log(result);
+  // });
+  client.query(`SELECT * FROM games WHERE sku = ${sku}`)
   .then((game) => {
-    res.send(game);
+    res.send(game.rows[0]);
   })
   .catch((err) => {
     console.error(err);
   })
+
 
 });
 
 server.get('/api/games/:sku/similar', (req, res) => {
   var sku = Number(req.params.sku);
 
-if (sku < 9000000) {
-    Game.find({sku: { $gte: (sku + 1), $lte: (sku + 20) }})
-    .then((simGames) => {
-      res.send(simGames);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-  } else {
-    Game.find({sku: { $gte: (sku - 20), $lte: (sku - 1) }})
-    .then((simGames) => {
-      res.send(simGames);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-  }
+// if (sku < 9000000) {
+//     Game.find({sku: { $gte: (sku + 1), $lte: (sku + 20) }})
+//     .then((simGames) => {
+//       res.send(simGames);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     })
+//   } else {
+//     Game.find({sku: { $gte: (sku - 20), $lte: (sku - 1) }})
+//     .then((simGames) => {
+//       res.send(simGames);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     })
+//   }
+// if (sku < 9000000) {
+//   client.query(`SELECT * FROM games WHERE `)
+//   .then((simGames) => {
+//     res.send(simGames);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   })
+// } else {
+//   Game.find({sku: { $gte: (sku - 20), $lte: (sku - 1) }})
+//   .then((simGames) => {
+//     res.send(simGames);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   })
+// }
 
 });
 
