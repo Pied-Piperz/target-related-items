@@ -28,6 +28,7 @@
     "faker": "^5.1.0",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
+    "newrelic": "^7.0.2",
     "pg": "^8.5.1",
     "pg-copy-streams": "^5.1.1",
     "react": "^17.0.1",
