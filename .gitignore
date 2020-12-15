@@ -5,3 +5,5 @@ node_modules
 relatedItemsDatabase.json
 relatedItemsDatabase.csv
 .csv
+newrelic.js
+newrelic_agent.log
