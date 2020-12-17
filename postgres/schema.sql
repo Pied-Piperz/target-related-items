@@ -10,8 +10,5 @@ system varchar(50),
 togetherOne int,
 togetherTwo int,
 togetherThree int,
-PRIMARY KEY (sku),
-(togetherOne) references games (sku),
-(togetherTwo) references games (sku),
-(togetherThree) references games (sku)
+PRIMARY KEY (sku)
 );
