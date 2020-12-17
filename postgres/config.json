@@ -1,5 +1,6 @@
 {
   "user": "donaldbumiller",
+  "password": "1234",
   "host": "localhost",
   "database": "relateditems",
   "port": 5432
